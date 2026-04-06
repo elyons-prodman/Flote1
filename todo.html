@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: #111;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px 14px;
+      font-size: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      background: #fff;
+      transition: border-color 0.15s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #666;
+    }
+
+    button.add-btn {
+      padding: 10px 18px;
+      font-size: 15px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button.add-btn:hover { background: #333; }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    li input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #111;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    li .task-text {
+      flex: 1;
+      font-size: 15px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    li.done .task-text {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    li button.delete-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #bbb;
+      font-size: 18px;
+      line-height: 1;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+
+    li button.delete-btn:hover { color: #e55; }
+
+    .empty {
+      text-align: center;
+      color: #bbb;
+      font-size: 14px;
+      padding: 32px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Todo</h1>
+    <div class="input-row">
+      <input type="text" id="taskInput" placeholder="Add a task..." autocomplete="off">
+      <button class="add-btn" onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+    <p class="empty" id="emptyMsg">No tasks yet.</p>
+  </div>
+
+  <script>
+    const input = document.getElementById('taskInput');
+    const list  = document.getElementById('taskList');
+    const empty = document.getElementById('emptyMsg');
+
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
+
+    function addTask() {
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+
+      const li = document.createElement('li');
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.addEventListener('change', () => li.classList.toggle('done', cb.checked));
+
+      const span = document.createElement('span');
+      span.className = 'task-text';
+      span.textContent = text;
+
+      const del = document.createElement('button');
+      del.className = 'delete-btn';
+      del.textContent = '×';
+      del.title = 'Delete';
+      del.addEventListener('click', () => { li.remove(); sync(); });
+
+      li.append(cb, span, del);
+      list.appendChild(li);
+      sync();
+      input.focus();
+    }
+
+    function sync() {
+      empty.style.display = list.children.length ? 'none' : 'block';
+    }
+
+    sync();
+  </script>
+</body>
+</html>
