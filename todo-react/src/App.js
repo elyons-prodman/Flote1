@@ -46,7 +46,7 @@ function App() {
             value={text}
             onChange={e => setText(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && addTask()}
-            placeholder="Add a task..."
+            placeholder="Add a todo..."
             autoComplete="off"
           />
         </div>
@@ -60,7 +60,7 @@ function App() {
           <button className="add-btn" onClick={addTask}>Add</button>
         </div>
 
-        {tasks.length > 0 && <p className="section-label">Tasks</p>}
+        {tasks.length > 0 && <p className="section-label">Todos</p>}
 
         <ul>
           {tasks.map(task => (
@@ -81,7 +81,7 @@ function App() {
           ))}
         </ul>
 
-        {tasks.length === 0 && <p className="empty">No tasks yet.</p>}
+        {tasks.length === 0 && <p className="empty">No todos yet.</p>}
       </div>
     </div>
   );
