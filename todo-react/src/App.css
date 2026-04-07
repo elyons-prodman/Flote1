@@ -2,7 +2,7 @@
 
 .page {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #c0392b;
+  background: #1a6bb5;
   color: #333;
   min-height: 100vh;
   display: flex;
@@ -68,7 +68,7 @@ select {
   font-size: 15px;
   font-weight: 600;
   background: #fff;
-  color: #c0392b;
+  color: #1a6bb5;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -113,7 +113,7 @@ ul {
 .task-item input[type="checkbox"] {
   width: 18px;
   height: 18px;
-  accent-color: #c0392b;
+  accent-color: #1a6bb5;
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -150,7 +150,7 @@ ul {
 
 .task-item.done .priority-badge { opacity: 0.4; }
 
-.badge-high   { background: #fde8e8; color: #c0392b; }
+.badge-high   { background: #fde8e8; color: #1a6bb5; }
 .badge-medium { background: #fef0e0; color: #b7620e; }
 .badge-low    { background: #e3f7ec; color: #1e8449; }
 
@@ -167,7 +167,7 @@ ul {
   flex-shrink: 0;
 }
 
-.delete-btn:hover { color: #c0392b; }
+.delete-btn:hover { color: #1a6bb5; }
 
 .empty {
   text-align: center;
